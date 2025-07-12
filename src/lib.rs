@@ -23,16 +23,14 @@ pub struct Point<T> {
 
 impl<T> Point<T> {
     pub fn new(x: T, y: T) -> Self {
+        Self { x, y }
         // TODO: Implement constructor for Point
     }
 }
 
 // Custom serialization for Bitcoin transaction
 pub trait BitcoinSerialize {
-    fn serialize(&self) -> Vec<u8> {
-         Self { x, y }
-        // TODO: Implement serialization to bytes
-    }
+    fn serialize(&self) -> Vec<u8>;
 }
 
 // Legacy Bitcoin transaction
