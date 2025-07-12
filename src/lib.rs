@@ -59,7 +59,7 @@ pub struct LegacyTransactionBuilder {
 
 impl Default for LegacyTransactionBuilder {
     fn default() -> Self {
-         Self {
+        Self {
             version: 1,
             inputs: vec![],
             outputs: vec![],
@@ -132,17 +132,21 @@ pub struct OutPoint {
 
 // Simple CLI argument parser
 pub fn parse_cli_args(args: &[String]) -> Result<CliCommand, BitcoinError> {
-     if args.is_empty() {
+    if args.is_empty() {
         return Err(BitcoinError::ParseError("No command provided".into()));
     }
 
     match args[0].as_str() {
         "send" => {
             if args.len() != 3 {
-                return Err(BitcoinError::ParseError("Usage: send <amount> <address>".into()));
+                return Err(BitcoinError::ParseError(
+                    "Usage: send <amount> <address>".into(),
+                ));
             }
 
-            let amount = args[1].parse::<u64>().map_err(|_| BitcoinError::InvalidAmount)?;
+            let amount = args[1]
+                .parse::<u64>()
+                .map_err(|_| BitcoinError::InvalidAmount)?;
             let address = args[2].clone();
 
             Ok(CliCommand::Send { amount, address })
